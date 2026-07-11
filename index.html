@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>clink - Global payments for Humans and Agents</title>
+<link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body data-mode="human" data-density="light" data-bg="minimal">
+
+  <!-- ============ 顶部导航 ============ -->
+  <header class="site-header">
+    <div class="container">
+      <a href="#" class="logo" aria-label="clink">
+        <svg class="dot-svg" width="70" height="26" viewBox="0 0 400 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M82.5732 48.0566C86.7297 48.0567 90.0996 51.4276 90.0996 55.584V66.6514C90.0996 70.8078 86.7297 74.1776 82.5732 74.1777H51.584C38.6256 74.1777 28.1211 84.6822 28.1211 97.6406C28.1211 110.599 38.6255 121.104 51.584 121.104H82.5732C86.7296 121.104 90.0995 124.474 90.0996 128.63V139.697C90.0996 143.854 86.7297 147.225 82.5732 147.225H51.584C24.2001 147.225 2 125.025 2 97.6406C2.00004 70.2568 24.2001 48.0566 51.584 48.0566H82.5732ZM326.061 30.3486C328.995 30.3486 331.374 32.7281 331.374 35.6621V141.911C331.374 144.845 328.995 147.225 326.061 147.225H308.353C305.419 147.225 303.039 144.845 303.039 141.911V35.6621C303.039 32.7281 305.419 30.3486 308.353 30.3486H326.061ZM246.49 48.0566C268.956 48.0568 287.103 65.7352 287.104 87.459V141.911C287.104 144.845 284.724 147.225 281.79 147.225H267.228C264.294 147.224 261.914 144.845 261.914 141.911V94.1973L261.884 92.9609C261.222 80.2731 250.427 70.2441 237.286 70.2441H226.406V141.911C226.406 144.845 224.027 147.224 221.094 147.225H206.53C203.596 147.225 201.217 144.845 201.217 141.911V55.584C201.217 51.4275 204.588 48.0566 208.744 48.0566H246.49ZM177.755 48.0566C180.689 48.0568 183.067 50.4363 183.067 53.3701V141.911C183.067 144.845 180.689 147.224 177.755 147.225H160.046C157.112 147.224 154.733 144.845 154.733 141.911V53.3701C154.733 50.4363 157.112 48.0569 160.046 48.0566H177.755ZM131.271 6C134.204 6 136.584 8.37949 136.584 11.3135V141.911C136.584 144.845 134.204 147.225 131.271 147.225H113.562C110.629 147.225 108.249 144.845 108.249 141.911V11.3135C108.249 8.37949 110.629 6 113.562 6H131.271ZM176.647 6C179.581 6 181.961 8.37949 181.961 11.3135V27.915C181.961 30.8489 179.581 33.2285 176.647 33.2285H160.046C157.112 33.2283 154.734 30.8487 154.733 27.915V11.3135C154.733 8.37965 157.112 6.00025 160.046 6H176.647Z" fill="currentColor"/>
+          <path d="M384.722 54.0336C390.982 54.0336 394.113 54.0333 396.058 55.9779C398.003 57.9229 398.003 61.054 398.003 67.3148V71.7416C398.003 78.0023 398.003 81.1326 396.058 83.0775C394.113 85.0224 390.982 85.0228 384.722 85.0228H380.295C379.667 85.0228 379.071 85.0226 378.504 85.0204C375.816 85.0097 373.199 86.1058 371.449 88.147C369.881 89.9767 369.17 92.3917 369.21 94.8012C369.227 95.8462 369.228 97.0081 369.228 98.3041V102.731C369.228 104.186 369.227 105.473 369.202 106.614C369.163 108.414 369.567 110.214 370.51 111.747C372.191 114.477 375.311 116.026 378.518 116.014C379.08 116.012 379.672 116.012 380.295 116.012H384.722C390.982 116.012 394.113 116.012 396.058 117.956C398.003 119.901 398.003 123.033 398.003 129.293V133.72C398.003 139.981 398.003 143.111 396.058 145.056C394.113 147.001 390.982 147.001 384.722 147.001H380.295C374.034 147.001 370.904 147.001 368.959 145.056C367.014 143.111 367.014 139.981 367.014 133.72V129.293C367.014 128.197 367.014 127.197 367.025 126.282C367.055 123.644 366.214 121.009 364.431 119.064C362.608 117.075 359.986 116.005 357.287 116.011C356.857 116.012 356.41 116.012 355.946 116.012H351.519C345.258 116.012 342.128 116.012 340.183 114.067C338.238 112.122 338.238 108.991 338.238 102.731V98.3041C338.238 92.0433 338.238 88.9121 340.183 86.9672C342.128 85.0223 345.258 85.0228 351.519 85.0228H355.946C356.391 85.0228 356.82 85.0229 357.234 85.0237C360.738 85.0303 364.136 83.2488 365.854 80.1952C366.694 78.7012 367.063 76.9914 367.033 75.2776C367.014 74.224 367.014 73.0513 367.014 71.7416V67.3148C367.014 61.054 367.014 57.9229 368.959 55.9779C370.904 54.0333 374.035 54.0336 380.295 54.0336H384.722Z" fill="currentColor"/>
+        </svg>
+      </a>
+
+      <div class="nav-right">
+        <nav class="nav-links">
+          <a href="#" class="nav-link">Products <svg viewBox="0 0 16 16" fill="none"><path d="M3 6l5 4 5-4" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg></a>
+          <a href="#" class="nav-link">Resources <svg viewBox="0 0 16 16" fill="none"><path d="M3 6l5 4 5-4" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg></a>
+          <a href="#" class="nav-link">Pricing</a>
+        </nav>
+        <div class="nav-actions">
+          <a href="#" class="lang-pill">EN <svg width="10" height="6" viewBox="0 0 16 16" fill="none"><path d="M3 6l5 4 5-4" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg></a>
+          <a href="#" class="btn btn-primary">Get&nbsp;Started <svg viewBox="0 0 20 20" fill="none"><path d="M16.665 10H3.332M12.5 5.833L16.665 10 12.5 14.167" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          <a href="#" class="btn btn-outline">Log&nbsp;in</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ Hero 区：Human / AI Agents 切换 ============ -->
+  <section class="hero" data-mode="human" id="hero">
+    <canvas class="hero-canvas-bg square-grid-canvas" id="heroCanvas"></canvas>
+
+    <!-- Vivid 背景版本：高饱和扁平色块（参考 13.png：横向阶梯错位分色，块内纯色扁平，仅在交界处做窄幅模糊过渡，避免圆形柔和渐变） -->
+    <div class="hero-bg-vivid" aria-hidden="true">
+      <span class="vivid-row" style="top:0%; height:19%;">
+        <span class="vseg" style="left:0%; width:39%; background:var(--hero-node-c2);"></span>
+        <span class="vseg" style="left:39%; width:61%; background:var(--hero-node-c1);"></span>
+        <span class="vseam" style="left:34%; width:10%; background:linear-gradient(90deg,var(--hero-node-c2),var(--hero-node-c1));"></span>
+      </span>
+      <span class="vivid-row" style="top:19%; height:22%;">
+        <span class="vseg" style="left:0%; width:21%; background:var(--hero-node-c1);"></span>
+        <span class="vseg" style="left:21%; width:54%; background:var(--hero-node-c2);"></span>
+        <span class="vseg" style="left:75%; width:25%; background:var(--hero-node-c1);"></span>
+        <span class="vseam" style="left:17%; width:8%; background:linear-gradient(90deg,var(--hero-node-c1),var(--hero-node-c2));"></span>
+        <span class="vseam" style="left:71%; width:8%; background:linear-gradient(90deg,var(--hero-node-c2),var(--hero-node-c1));"></span>
+      </span>
+      <span class="vivid-row" style="top:41%; height:20%;">
+        <span class="vseg" style="left:0%; width:13%; background:var(--hero-node-c1);"></span>
+        <span class="vseg" style="left:13%; width:87%; background:var(--hero-node-c2);"></span>
+        <span class="vseam" style="left:9%; width:8%; background:linear-gradient(90deg,var(--hero-node-c1),var(--hero-node-c2));"></span>
+      </span>
+      <span class="vivid-row" style="top:61%; height:22%;">
+        <span class="vseg" style="left:0%; width:56%; background:var(--hero-node-c2);"></span>
+        <span class="vseg" style="left:56%; width:44%; background:var(--hero-node-c1);"></span>
+        <span class="vseam" style="left:51%; width:10%; background:linear-gradient(90deg,var(--hero-node-c2),var(--hero-node-c1));"></span>
+      </span>
+      <span class="vivid-row" style="top:83%; height:17%;">
+        <span class="vseg" style="left:0%; width:28%; background:var(--hero-node-c2);"></span>
+        <span class="vseg" style="left:28%; width:72%; background:var(--hero-node-c1);"></span>
+        <span class="vseam" style="left:23%; width:10%; background:linear-gradient(90deg,var(--hero-node-c2),var(--hero-node-c1));"></span>
+      </span>
+    </div>
+
+    <!-- AI Agents 模式专属装饰：散落代码片段 + ASCII 字符艺术（参考 2.png） -->
+    <div class="hero-code-deco" aria-hidden="true">
+      <pre class="ascii-art">    .:-=+*#%@%#*+=-:.
+   :=+*#%@@@@@@%#*+=:
+  -+#%@@@@@@@@@@@@%#+-
+ :*%@@@@@@@@@@@@@@@@%*:
+ =%@@@@@@@@@@@@@@@@@@%=
+ *@@@@@@@@@@@@@@@@@@@@*
+ #@@@@@@@@@@@@@@@@@@@@#
+ *@@@@@@@@@@@@@@@@@@@@*
+ =%@@@@@@@@@@@@@@@@@@%=
+  :*%@@@@@@@@@@@@@@%*:
+   -+#%@@@@@@@@%#+-
+    :=+*#%%%#*+=:
+      .:-=+=-:.</pre>
+
+      <pre class="code-frag" style="top:9%; left:5%;">async
+def
+pay(
+  agent,
+amount
+):</pre>
+
+      <pre class="code-frag" style="top:6%; left:66%;">retry_count
+= 0
+while
+not ok:
+  await
+  send()</pre>
+
+      <pre class="code-frag" style="top:46%; left:2.5%;">class
+Agent:
+def
+init(
+self,
+key
+):</pre>
+
+      <pre class="code-frag" style="top:38%; left:87%;">status:
+"settled"
+tx_id:
+None
+amount:
+128.50</pre>
+
+      <pre class="code-frag" style="top:76%; left:9%;">for
+tx in
+queue:
+  process(
+  tx
+)</pre>
+
+      <pre class="code-frag" style="top:80%; left:71%;">return
+{
+"ok":
+true,
+"id": x
+}</pre>
+    </div>
+
+    <div class="hero-inner">
+      <div class="hero-center">
+        <div class="mode-switch" role="tablist" aria-label="Human or AI Agents">
+          <div class="mode-switch-thumb" aria-hidden="true"></div>
+          <button class="mode-switch-btn is-active" data-mode-target="human" role="tab" aria-selected="true">Human</button>
+          <button class="mode-switch-btn" data-mode-target="agent" role="tab" aria-selected="false">AI Agents</button>
+        </div>
+
+        <h1 class="hero-title">Global payments<br />for<br />Humans and Agents</h1>
+        <p class="hero-subtitle">Sell to people today, and agents tomorrow, with one global payment platform.</p>
+
+        <div class="hero-cta">
+          <a href="#" class="cta-btn cta-primary">Start Building <svg viewBox="0 0 20 20" fill="none"><path d="M16.665 10H3.332M12.5 5.833L16.665 10 12.5 14.167" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          <a href="#" class="cta-btn cta-secondary">Explore Agent Payments <svg viewBox="0 0 20 20" fill="none"><path d="M16.665 10H3.332M12.5 5.833L16.665 10 12.5 14.167" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 主体内容（白底圆角） ============ -->
+  <main class="page-body">
+
+    <!-- Features 标题区 + 四大卡片 -->
+    <section class="features-block container">
+      <div class="reveal">
+        <span class="section-eyebrow">Features</span>
+        <h2 class="section-title">One Line Placeholder</h2>
+        <p class="section-desc">Description placeholder</p>
+      </div>
+
+      <!-- Feature 1: Global Payments -->
+      <article class="feature-card">
+        <div class="feature-card__text reveal reveal-left">
+          <h3 class="feature-card__title">Global Payments</h3>
+          <p class="feature-card__desc">Deliver a frictionless checkout experience anywhere. We unify global gateways into one interface, ensuring the right payment method is always available.</p>
+          <a href="#" class="feature-card__cta">Explore payments</a>
+        </div>
+        <div class="feature-card__visual reveal reveal-right">
+          <div class="mockup-grid">
+            <div class="mockup-tile"><img src="assets/CodeBuddyAssets/115_22512/8.svg" alt="" onerror="this.style.display='none'"></div>
+            <div class="mockup-tile"><img src="assets/CodeBuddyAssets/115_22512/9.svg" alt="" onerror="this.style.display='none'"></div>
+            <div class="mockup-tile"><img src="assets/CodeBuddyAssets/115_22512/10.svg" alt="" onerror="this.style.display='none'"></div>
+            <div class="mockup-tile"><img src="assets/CodeBuddyAssets/115_22512/148.svg" alt="" onerror="this.style.display='none'"></div>
+            <div class="mockup-tile"><img src="assets/CodeBuddyAssets/115_22512/12.svg" alt="" onerror="this.style.display='none'"></div>
+            <div class="mockup-tile"><img src="assets/CodeBuddyAssets/115_22512/148.svg" alt="" onerror="this.style.display='none'"></div>
+            <div class="mockup-tile"><img src="assets/CodeBuddyAssets/115_22512/14.svg" alt="" onerror="this.style.display='none'"></div>
+            <div class="mockup-tile route-field is-active" style="aspect-ratio:auto;font-size:11px;">USD · EUR · JPY</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Feature 2: Smart Routing -->
+      <article class="feature-card">
+        <div class="feature-card__text reveal reveal-left">
+          <h3 class="feature-card__title">Smart Routing</h3>
+          <p class="feature-card__desc">Recover lost revenue on autopilot. Our smart orchestration engine uses dynamic routing and automatic retries to maximize transaction success rates.</p>
+          <a href="#" class="feature-card__cta">See smart routing</a>
+        </div>
+        <div class="feature-card__visual reveal reveal-right">
+          <div class="visual-cluster">
+            <div class="route-form">
+              <div class="route-field"><img src="assets/CodeBuddyAssets/115_22512/37.svg" width="16" height="16" alt="" onerror="this.style.display='none'">Issuer Country</div>
+              <div class="route-field"><img src="assets/CodeBuddyAssets/115_22512/38.svg" width="16" height="16" alt="" onerror="this.style.display='none'">Payment Methods</div>
+              <div class="route-field is-active"><span class="dot"></span>Currency</div>
+              <div class="route-field"><img src="assets/CodeBuddyAssets/115_22512/38.svg" width="16" height="16" alt="" onerror="this.style.display='none'">Payment Methods</div>
+            </div>
+            <div class="pay-confirm-card">
+              <div class="pay-confirm-inner">
+                <div class="pay-confirm-btn">Pay</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Feature 3: Billing -->
+      <article class="feature-card">
+        <div class="feature-card__text reveal reveal-left">
+          <h3 class="feature-card__title">Billing</h3>
+          <p class="feature-card__desc">Automate your entire revenue lifecycle. Handle complex subscriptions, recurring invoices, and customer self-service portals from a single dashboard.</p>
+          <a href="#" class="feature-card__cta">Discover billing</a>
+        </div>
+        <div class="feature-card__visual reveal reveal-right">
+          <div class="chart-stack">
+            <div class="chart-card chart-card--left">
+              <div class="chart-label"><span>May</span><span>May</span></div>
+              <div class="chart-bars"><span style="height:30%"></span><span style="height:42%"></span><span style="height:55%"></span><span style="height:68%"></span><span style="height:80%"></span><span style="height:92%"></span><span style="height:100%"></span></div>
+              <div class="chart-meta"><div class="k">Gross volume</div><div class="v">$21234.01</div></div>
+            </div>
+            <div class="chart-card chart-card--right">
+              <div class="chart-label"><span>Nov</span><span>June</span></div>
+              <div class="chart-bars"><span style="height:100%"></span><span style="height:88%"></span><span style="height:74%"></span><span style="height:60%"></span><span style="height:46%"></span><span style="height:32%"></span><span style="height:20%"></span></div>
+              <div class="chart-meta"><div class="k">Gross volume</div><div class="v">$21234.01</div></div>
+            </div>
+            <div class="balance-card">
+              <div class="balance-inner">
+                <div class="balance-header"></div>
+                <div class="balance-label">Balance</div>
+                <div class="balance-row"><span>Thompson</span><span>JPY 509</span></div>
+                <div class="balance-row"><span>Jane</span><span>USD 56.4</span></div>
+                <div class="balance-row"><span>Benjamin</span><span>EUR 45.5</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Feature 4: Your Data, Any Processor -->
+      <article class="feature-card">
+        <div class="feature-card__text reveal reveal-left">
+          <h3 class="feature-card__title">Your Data, Any Processor</h3>
+          <p class="feature-card__desc">Connect once, route anywhere. Clink keeps your subscription data independent and portable, so you can add, swap, or combine providers without rewriting a line of code.</p>
+        </div>
+        <div class="feature-card__visual reveal reveal-right">
+          <div class="visual-cluster">
+            <div class="subscription-card">
+              <div class="plan-name">Basic Plan</div>
+              <div class="plan-price">USD $26.99</div>
+              <div class="plan-period">per week</div>
+              <div class="pay-mini">Pay</div>
+            </div>
+            <div class="gradient-orb">
+              <img src="assets/CodeBuddyAssets/115_22512/72.svg" alt="" onerror="this.style.display='none'" style="filter:brightness(0) invert(1);width:28px;height:28px;">
+            </div>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <!-- 三张能力小卡片区 -->
+    <section class="capability-block">
+      <div class="container">
+        <div class="capability-grid reveal">
+          <!-- Global coverage -->
+          <div class="capability-card">
+            <div class="capability-card__visual">
+              <div class="coverage-visual">
+                <div class="core"><div class="core-inner"></div></div>
+                <div class="chip chip--1"><img src="assets/CodeBuddyAssets/115_22512/73.svg" alt="" onerror="this.style.display='none'"></div>
+                <div class="chip chip--2"><img src="assets/CodeBuddyAssets/115_22512/74.svg" alt="" onerror="this.style.display='none'"></div>
+                <div class="chip chip--3"><img src="assets/CodeBuddyAssets/115_22512/75.svg" alt="" onerror="this.style.display='none'"></div>
+                <div class="chip chip--4"><img src="assets/CodeBuddyAssets/115_22512/76.svg" alt="" onerror="this.style.display='none'"></div>
+              </div>
+            </div>
+            <h4 class="capability-card__title">Global coverage</h4>
+            <p class="capability-card__desc">Unlock global markets instantly with support for 135+ currencies and local payment methods.</p>
+          </div>
+
+          <!-- Secure & Stable -->
+          <div class="capability-card reveal reveal-scale">
+            <div class="capability-card__visual">
+              <div class="secure-visual">
+                <div class="card-mini"></div>
+                <div class="shield">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z" stroke="currentColor" stroke-width="1.4" fill="none"/></svg>
+                </div>
+                <div class="lock-mini"></div>
+              </div>
+            </div>
+            <h4 class="capability-card__title">Secure &amp; Stable</h4>
+            <p class="capability-card__desc">Bank-grade security you can trust. A PCI-compliant vault that keeps customer data safe.</p>
+          </div>
+
+          <!-- Simple integration -->
+          <div class="capability-card reveal reveal-scale">
+            <div class="capability-card__visual">
+              <div class="form-mockup">
+                <div class="fm-label">Payment method</div>
+                <div class="fm-input" style="margin-bottom:10px;"><span class="fm-card-icon"></span>Credit Card</div>
+                <div class="fm-label">Card Information</div>
+                <div class="fm-input">Card Number</div>
+                <div class="fm-row">
+                  <div class="fm-input">MM / YY</div>
+                  <div class="fm-input">CVV</div>
+                </div>
+                <div class="fm-label" style="margin-top:6px;">Cardholder Name</div>
+                <div class="fm-input">Name on Card</div>
+                <div class="fm-pay-methods">
+                  <span><span class="dot"></span>Apple Pay</span>
+                  <span><span class="dot"></span>Paypal</span>
+                </div>
+              </div>
+            </div>
+            <h4 class="capability-card__title">Simple integration</h4>
+            <p class="capability-card__desc">Go live in minutes using our developer-friendly API or a prebuilt hosted solution.</p>
+          </div>
+
+          <!-- Unified Costs -->
+          <div class="capability-card reveal reveal-scale">
+            <div class="capability-card__visual">
+              <div class="costs-visual">
+                <div class="report-card">
+                  <div class="report-title">Report</div>
+                  <div class="report-bar"></div>
+                  <div class="report-bar"></div>
+                  <div class="report-bar"></div>
+                </div>
+                <div class="costs-pills">
+                  <div class="costs-pill"><span class="dot"></span>Cost Saving</div>
+                  <div class="costs-pill"><span class="dot"></span>Lost Revenue Found</div>
+                  <div class="costs-pill"><span class="dot"></span>Accuracy</div>
+                  <div class="costs-pill"><span class="dot"></span>Fraud Prevention</div>
+                </div>
+              </div>
+            </div>
+            <h4 class="capability-card__title">Unified Costs</h4>
+            <p class="capability-card__desc">Simplify your finances with a transparent cost model, No hidden fees, just growth.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Built for Scale 过渡区 -->
+    <section class="scale-block">
+      <h2 class="scale-title reveal reveal-left">Built for Scale.</h2>
+      <h2 class="scale-title gradient reveal reveal-right">Ready for Anywhere.</h2>
+    </section>
+
+    <!-- 合作伙伴墙 -->
+    <section class="marquee-block reveal">
+      <div class="container">
+        <span class="section-eyebrow" style="margin-bottom:0;">&nbsp;</span>
+        <h2 class="section-title">Cooperation partners</h2>
+        <p class="section-desc">Trusted by high-growth companies worldwide.</p>
+      </div>
+      <div class="marquee-viewport horizontal">
+        <div class="marquee-row anim-x" id="partnersRow"></div>
+      </div>
+    </section>
+
+    <!-- 客户评价墙 -->
+    <section class="marquee-block reveal">
+      <div class="container">
+        <h2 class="section-title">Trusted by Product Builders</h2>
+        <p class="section-desc">See how industry leaders are using our platform to streamline operations and accelerate global expansion.</p>
+
+        <div class="testimonial-columns">
+          <div class="marquee-viewport vertical" style="height:100%;">
+            <div class="testimonial-track" id="testiCol1"></div>
+          </div>
+          <div class="marquee-viewport vertical" style="height:100%;">
+            <div class="testimonial-track dir-reverse" id="testiCol2"></div>
+          </div>
+          <div class="marquee-viewport vertical" style="height:100%;">
+            <div class="testimonial-track" id="testiCol3"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ Footer ============ -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <a href="#" class="footer-logo" aria-label="clink">
+          <svg width="70" height="26" viewBox="0 0 400 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path class="dot-svg" d="M82.5732 48.0566C86.7297 48.0567 90.0996 51.4276 90.0996 55.584V66.6514C90.0996 70.8078 86.7297 74.1776 82.5732 74.1777H51.584C38.6256 74.1777 28.1211 84.6822 28.1211 97.6406C28.1211 110.599 38.6255 121.104 51.584 121.104H82.5732C86.7296 121.104 90.0995 124.474 90.0996 128.63V139.697C90.0996 143.854 86.7297 147.225 82.5732 147.225H51.584C24.2001 147.225 2 125.025 2 97.6406C2.00004 70.2568 24.2001 48.0566 51.584 48.0566H82.5732ZM326.061 30.3486C328.995 30.3486 331.374 32.7281 331.374 35.6621V141.911C331.374 144.845 328.995 147.225 326.061 147.225H308.353C305.419 147.225 303.039 144.845 303.039 141.911V35.6621C303.039 32.7281 305.419 30.3486 308.353 30.3486H326.061ZM246.49 48.0566C268.956 48.0568 287.103 65.7352 287.104 87.459V141.911C287.104 144.845 284.724 147.225 281.79 147.225H267.228C264.294 147.224 261.914 144.845 261.914 141.911V94.1973L261.884 92.9609C261.222 80.2731 250.427 70.2441 237.286 70.2441H226.406V141.911C226.406 144.845 224.027 147.224 221.094 147.225H206.53C203.596 147.225 201.217 144.845 201.217 141.911V55.584C201.217 51.4275 204.588 48.0566 208.744 48.0566H246.49ZM177.755 48.0566C180.689 48.0568 183.067 50.4363 183.067 53.3701V141.911C183.067 144.845 180.689 147.224 177.755 147.225H160.046C157.112 147.224 154.733 144.845 154.733 141.911V53.3701C154.733 50.4363 157.112 48.0569 160.046 48.0566H177.755ZM131.271 6C134.204 6 136.584 8.37949 136.584 11.3135V141.911C136.584 144.845 134.204 147.225 131.271 147.225H113.562C110.629 147.225 108.249 144.845 108.249 141.911V11.3135C108.249 8.37949 110.629 6 113.562 6H131.271ZM176.647 6C179.581 6 181.961 8.37949 181.961 11.3135V27.915C181.961 30.8489 179.581 33.2285 176.647 33.2285H160.046C157.112 33.2283 154.734 30.8487 154.733 27.915V11.3135C154.733 8.37965 157.112 6.00025 160.046 6H176.647Z" fill="#ffffff"/>
+            <path class="dot-svg" d="M384.722 54.0336C390.982 54.0336 394.113 54.0333 396.058 55.9779C398.003 57.9229 398.003 61.054 398.003 67.3148V71.7416C398.003 78.0023 398.003 81.1326 396.058 83.0775C394.113 85.0224 390.982 85.0228 384.722 85.0228H380.295C379.667 85.0228 379.071 85.0226 378.504 85.0204C375.816 85.0097 373.199 86.1058 371.449 88.147C369.881 89.9767 369.17 92.3917 369.21 94.8012C369.227 95.8462 369.228 97.0081 369.228 98.3041V102.731C369.228 104.186 369.227 105.473 369.202 106.614C369.163 108.414 369.567 110.214 370.51 111.747C372.191 114.477 375.311 116.026 378.518 116.014C379.08 116.012 379.672 116.012 380.295 116.012H384.722C390.982 116.012 394.113 116.012 396.058 117.956C398.003 119.901 398.003 123.033 398.003 129.293V133.72C398.003 139.981 398.003 143.111 396.058 145.056C394.113 147.001 390.982 147.001 384.722 147.001H380.295C374.034 147.001 370.904 147.001 368.959 145.056C367.014 143.111 367.014 139.981 367.014 133.72V129.293C367.014 128.197 367.014 127.197 367.025 126.282C367.055 123.644 366.214 121.009 364.431 119.064C362.608 117.075 359.986 116.005 357.287 116.011C356.857 116.012 356.41 116.012 355.946 116.012H351.519C345.258 116.012 342.128 116.012 340.183 114.067C338.238 112.122 338.238 108.991 338.238 102.731V98.3041C338.238 92.0433 338.238 88.9121 340.183 86.9672C342.128 85.0223 345.258 85.0228 351.519 85.0228H355.946C356.391 85.0228 356.82 85.0229 357.234 85.0237C360.738 85.0303 364.136 83.2488 365.854 80.1952C366.694 78.7012 367.063 76.9914 367.033 75.2776C367.014 74.224 367.014 73.0513 367.014 71.7416V67.3148C367.014 61.054 367.014 57.9229 368.959 55.9779C370.904 54.0333 374.035 54.0336 380.295 54.0336H384.722Z" fill="#ffffff"/>
+          </svg>
+        </a>
+
+        <div class="footer-links">
+          <div class="footer-col">
+            <h4>Products</h4>
+            <a href="#">Agent Payment</a>
+            <a href="#">MoR</a>
+            <a href="#">Billing</a>
+            <a href="#">Payment Orchestration</a>
+          </div>
+          <div class="footer-col">
+            <h4>Resources</h4>
+            <a href="#">Document</a>
+            <a href="#">API</a>
+            <a href="#">Changelog</a>
+            <a href="#">Blog</a>
+          </div>
+          <div class="footer-col">
+            <h4>Company</h4>
+            <a href="#">About</a>
+            <a href="#">Press</a>
+            <a href="#">Privacy</a>
+            <a href="#">Terms</a>
+          </div>
+          <div class="footer-col">
+            <h4>Compare</h4>
+            <a href="#">vs Creem</a>
+            <a href="#">vs Paddle</a>
+            <a href="#">vs FastSpring</a>
+            <a href="#">vs Stripe</a>
+            <a href="#">vs Yuno</a>
+            <a href="#">vs Primer</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-mid">
+        <span class="footer-tagline">Scale Global, Bill Local.</span>
+        <div class="footer-social">
+          <a href="#" aria-label="X / Twitter"><svg viewBox="0 0 24 24"><path d="M18.9 2H22l-7.6 8.7L23 22h-6.6l-5.2-6.6L5 22H2l8.2-9.3L1.5 2h6.7l4.7 6 5.9-6z"/></svg></a>
+          <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M4.98 3.5a2.5 2.5 0 11-.02 5 2.5 2.5 0 01.02-5zM3 8.98h4V21H3V8.98zM9 8.98h3.84v1.64h.05c.53-1 1.83-2.06 3.77-2.06 4.03 0 4.77 2.65 4.77 6.1V21h-4v-5.4c0-1.29-.02-2.95-1.8-2.95-1.8 0-2.07 1.4-2.07 2.86V21H9V8.98z"/></svg></a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>Copyright © clinkbill.com All Rights Reserved.</span>
+        <div class="footer-bottom-links">
+          <a href="#">Privacy</a>
+          <a href="#">Terms</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============ 背景风格 / 字体切换（Light=当前字体，Bold=TWK Everett） ============ -->
+  <div class="viewport-toggles">
+    <div class="bgstyle-toggle" role="group" aria-label="Hero background style">
+      <button data-bg="minimal" class="is-active">Minimal</button>
+      <button data-bg="vivid">Vivid</button>
+    </div>
+    <div class="density-toggle" role="group" aria-label="Font style">
+      <button data-density="light" class="is-active">Light</button>
+      <button data-density="bold">Bold</button>
+    </div>
+  </div>
+
+  <script src="assets/js/square-grid.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

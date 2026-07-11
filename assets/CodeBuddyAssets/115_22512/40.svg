@@ -1,0 +1,10 @@
+<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path opacity="0.5" d="M5 7.5H8.33333" stroke="var(--Text-placeholder, #71717A)" style="stroke:#71717A;stroke:color(display-p3 0.4431 0.4431 0.4784);stroke-opacity:1;" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M17.3611 8.3335H15.1923C13.7054 8.3335 12.5 9.45278 12.5 10.8335C12.5 12.2142 13.7054 13.3335 15.1923 13.3335H17.3611C17.4306 13.3335 17.4653 13.3335 17.4946 13.3317C17.944 13.3044 18.302 12.972 18.3314 12.5547C18.3333 12.5274 18.3333 12.4952 18.3333 12.4307V9.23627C18.3333 9.17179 18.3333 9.13955 18.3314 9.11233C18.302 8.69503 17.944 8.36263 17.4946 8.33528C17.4653 8.3335 17.4306 8.3335 17.3611 8.3335Z" stroke="var(--Text-placeholder, #71717A)" style="stroke:#71717A;stroke:color(display-p3 0.4431 0.4431 0.4784);stroke-opacity:1;"/>
+<path d="M17.4722 8.33317C17.4074 6.77292 17.1985 5.81629 16.525 5.14281C15.5487 4.1665 13.9773 4.1665 10.8346 4.1665H8.33464C5.19194 4.1665 3.62059 4.1665 2.64428 5.14281C1.66797 6.11913 1.66797 7.69047 1.66797 10.8332C1.66797 13.9759 1.66797 15.5472 2.64428 16.5235C3.62059 17.4998 5.19194 17.4998 8.33464 17.4998H10.8346C13.9773 17.4998 15.5487 17.4998 16.525 16.5235C17.1985 15.85 17.4074 14.8934 17.4722 13.3332" stroke="var(--Text-placeholder, #71717A)" style="stroke:#71717A;stroke:color(display-p3 0.4431 0.4431 0.4784);stroke-opacity:1;"/>
+<path opacity="0.5" d="M5 4.1665L8.1129 2.10245C8.98953 1.52119 10.1771 1.52119 11.0538 2.10245L14.1667 4.1665" stroke="var(--Text-placeholder, #71717A)" style="stroke:#71717A;stroke:color(display-p3 0.4431 0.4431 0.4784);stroke-opacity:1;" stroke-linecap="round"/>
+<g opacity="0.5">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M14.9922 10.8335H14.9997Z" fill="var(--Text-placeholder, #71717A)" style="fill:#71717A;fill:color(display-p3 0.4431 0.4431 0.4784);fill-opacity:1;"/>
+<path d="M14.9922 10.8335H14.9997" stroke="var(--Text-placeholder, #71717A)" style="stroke:#71717A;stroke:color(display-p3 0.4431 0.4431 0.4784);stroke-opacity:1;" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+</svg>
