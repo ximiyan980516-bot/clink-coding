@@ -607,6 +607,16 @@ body[data-bg="vivid"] .hero-bg-vivid { opacity: 1; }
 body[data-bg="vivid"] .hero { background: var(--hero-vivid-base); }
 body[data-bg="vivid"] .hero-canvas-bg.square-grid-canvas { opacity: 0.35; mix-blend-mode: overlay; }
 
+/* Vivid 模式下导航栏操作项统一改为白色，在高饱和彩色背景上保持清晰对比 */
+body[data-bg="vivid"] .nav-link { color: rgba(255, 255, 255, 0.75); }
+body[data-bg="vivid"] .nav-link:hover { color: #fff; }
+body[data-bg="vivid"] .lang-pill { color: #fff; }
+body[data-bg="vivid"] .btn-outline {
+  background: transparent;
+  color: #fff;
+  outline: 1px solid rgba(255, 255, 255, 0.35);
+}
+
 /* 横向条带：每一行错位划分为若干扁平色块，整体做极缓慢的呼吸位移，增添动感 */
 .vivid-row {
   position: absolute;
