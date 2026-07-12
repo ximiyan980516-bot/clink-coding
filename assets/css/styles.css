@@ -76,7 +76,7 @@
   --font-mono: 'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace;
 
   /* ---------- 字号分级（参照 Vercel Heading/Label/Copy/Button 逻辑，融合 Figma 字重）---------- */
-  --fs-hero-title: clamp(40px, 6.4vw, 92px);
+  --fs-hero-title: clamp(40px, 6.4vw, 84px);
   --fs-h1: clamp(28px, 2.8vw, 40px);
   --fs-h2: clamp(24px, 2.2vw, 36px);
   --fs-h3: 24px;
@@ -536,7 +536,7 @@ body[data-mode="agent"] .mode-switch { outline-color: rgba(255,255,255,0.14); }
   align-items: center;
   justify-content: center;
   font-family: var(--font-ui);
-  font-size: 32px;
+  font-size: 24px;
   font-weight: 500;
   transition: color var(--dur-base) var(--ease-standard);
   color: var(--text-secondary);
@@ -572,7 +572,7 @@ body[data-mode="agent"] .mode-switch-btn.is-active { color: var(--hero-switch-th
   border-radius: 20px;
   font-family: var(--font-body);
   font-size: var(--fs-body);
-  font-weight: 500;
+  font-weight: 400;
   transition: transform var(--dur-fast) var(--ease-standard), background var(--dur-theme) var(--ease-standard), color var(--dur-theme) var(--ease-standard);
 }
 .cta-btn:hover { transform: translateY(-1px); }

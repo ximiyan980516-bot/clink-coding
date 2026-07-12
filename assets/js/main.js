@@ -21,11 +21,11 @@
   /* Human / AI Agents 两种模式下的主标题与副标题文案 */
   var HERO_COPY = {
     human: {
-      title: 'Global payments<br />for<br />Humans &amp; Agents',
+      title: 'Global payments for<br />Humans &amp; Agents',
       subtitle: 'Sell to people today, and agents tomorrow, with one global payment platform.'
     },
     agent: {
-      title: 'Payments for<br />a world<br />where agents buy',
+      title: 'Payments for a world<br />where agents buy',
       subtitle: 'Let agents discover, authorize, and pay for your products through agent-native commerce flows.'
     }
   };
