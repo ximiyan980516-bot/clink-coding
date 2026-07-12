@@ -794,7 +794,7 @@ body[data-bg="vivid"] .btn-outline {
   position: relative;
   width: 100vw;
   margin-top: 20px;
-  height: 108px;
+  height: 192px;
   overflow: hidden;
   pointer-events: none;
 }
@@ -897,9 +897,8 @@ body[data-media-layout="float"] .hero-media-float { opacity: 1; }
 .float-card,
 .float-code {
   position: absolute;
-  width: 176px;
-  height: 176px;
-  border-radius: 20px;
+  width: 200px;
+  height: 200px;
   overflow: hidden;
 }
 .float-card {
@@ -911,6 +910,7 @@ body[data-media-layout="float"] .hero-media-float { opacity: 1; }
 .float-code {
   display: flex;
   flex-direction: column;
+  border-radius: 20px;
   background: #14141A;
   border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow: 0 20px 44px rgba(0, 0, 0, 0.4);
@@ -946,10 +946,10 @@ body[data-media-layout="float"] .hero-media-float { opacity: 1; }
 }
 
 /* 四角定位：左上/左下贴左侧，右上/右下贴右侧，避免遮挡中央文案 */
-.float-card--tl, .float-code--tl { left: 4%; top: 14%; }
-.float-card--bl, .float-code--bl { left: 8%; top: 62%; width: 148px; height: 148px; }
-.float-card--tr, .float-code--tr { right: 5%; top: 10%; width: 156px; height: 156px; }
-.float-card--br, .float-code--br { right: 3%; top: 60%; }
+.float-card--tl, .float-code--tl { left: 4%; top: 12%; }
+.float-card--bl, .float-code--bl { left: 6%; top: 60%; width: 168px; height: 168px; }
+.float-card--tr, .float-code--tr { right: 3%; top: 8%; width: 178px; height: 178px; }
+.float-card--br, .float-code--br { right: 1%; top: 58%; }
 
 .float-anim-a { animation: floatDrift 6.5s ease-in-out infinite; }
 .float-anim-b { animation: floatDrift 7.5s ease-in-out infinite; animation-delay: -2.1s; }
