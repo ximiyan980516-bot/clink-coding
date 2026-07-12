@@ -21,7 +21,7 @@
   /* Human / AI Agents 两种模式下的主标题与副标题文案 */
   var HERO_COPY = {
     human: {
-      title: 'Global payments<br />for<br />Humans and Agents',
+      title: 'Global payments<br />for<br />Humans &amp; Agents',
       subtitle: 'Sell to people today, and agents tomorrow, with one global payment platform.'
     },
     agent: {
