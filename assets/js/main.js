@@ -18,6 +18,18 @@
   var PALETTE_HUMAN = ['#FF902A', '#F68FDE'];
   var PALETTE_AGENT = ['#9B79FB', '#2C4AFC'];
 
+  /* Human / AI Agents 两种模式下的主标题与副标题文案 */
+  var HERO_COPY = {
+    human: {
+      title: 'Global payments<br />for<br />Humans and Agents',
+      subtitle: 'Sell to people today, and agents tomorrow, with one global payment platform.'
+    },
+    agent: {
+      title: 'Payments for<br />a world<br />where agents buy',
+      subtitle: 'Let agents discover, authorize, and pay for your products through agent-native commerce flows.'
+    }
+  };
+
   /* ---------------------------------------------------------
      1. 读取当前密度对应的节点数量（CSS 变量）
   --------------------------------------------------------- */
@@ -96,6 +108,12 @@
       heroNet.setPalette(mode === 'agent' ? PALETTE_AGENT : PALETTE_HUMAN);
       // 切换模式时让背景方块重新走一遍生长入场，呼应模式切换的视觉反馈
       heroNet.replay();
+    }
+
+    var copy = HERO_COPY[mode];
+    if (copy) {
+      if (heroTitleEl) heroTitleEl.innerHTML = copy.title;
+      if (heroSubtitleEl) heroSubtitleEl.textContent = copy.subtitle;
     }
 
     if (mode === 'agent') {
