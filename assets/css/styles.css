@@ -793,8 +793,8 @@ body[data-bg="vivid"] .btn-outline {
 .hero-media-peek {
   position: relative;
   width: 100vw;
-  margin-top: 24px;
-  height: 46px;
+  margin-top: 20px;
+  height: 108px;
   overflow: hidden;
   pointer-events: none;
 }
@@ -873,6 +873,102 @@ body[data-bg="vivid"] .btn-outline {
   .hero-media-peek { display: none; }
 }
 
+/* Scroll/Float 排版切换：默认展示滚动版（.hero-media-peek），
+   Float 模式下隐藏滚动版、显示左右浮动版；仅 Minimal 背景下开放该切换，
+   Vivid 背景下始终使用滚动版且开关自动隐藏 */
+body[data-media-layout="float"] .hero-media-peek { display: none; }
+
+/* =========================================================
+   Float 排版方案：4 张卡片分布在 Hero 左右两侧（贴近参考图 6/9/10/11.png 的
+   四角散落构图），带轻微、各自不同步的上下漂浮动效；
+   Human 模式展示产品图片，Agent 模式自动替换为代码窗口卡片
+   ========================================================= */
+.hero-media-float {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--dur-theme) var(--ease-standard);
+}
+body[data-media-layout="float"] .hero-media-float { opacity: 1; }
+
+.float-card,
+.float-code {
+  position: absolute;
+  width: 176px;
+  height: 176px;
+  border-radius: 20px;
+  overflow: hidden;
+}
+.float-card {
+  background: #EFEFEF;
+  box-shadow: 0 20px 44px rgba(17, 22, 34, 0.16);
+}
+.float-card img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+.float-code {
+  display: flex;
+  flex-direction: column;
+  background: #14141A;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 20px 44px rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--dur-theme) var(--ease-standard);
+}
+.hero[data-mode="agent"] .float-card { opacity: 0; visibility: hidden; }
+.hero[data-mode="agent"] .float-code { opacity: 1; visibility: visible; }
+
+.float-code .code-window-card__bar {
+  display: flex;
+  gap: 6px;
+  padding: 10px 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  flex-shrink: 0;
+}
+.float-code .code-window-card__bar span {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+}
+.float-code .code-window-card__body {
+  margin: 0;
+  padding: 12px 14px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 1.55;
+  color: var(--cool-violet);
+  white-space: pre;
+  opacity: 0.85;
+  overflow: hidden;
+}
+
+/* 四角定位：左上/左下贴左侧，右上/右下贴右侧，避免遮挡中央文案 */
+.float-card--tl, .float-code--tl { left: 4%; top: 14%; }
+.float-card--bl, .float-code--bl { left: 8%; top: 62%; width: 148px; height: 148px; }
+.float-card--tr, .float-code--tr { right: 5%; top: 10%; width: 156px; height: 156px; }
+.float-card--br, .float-code--br { right: 3%; top: 60%; }
+
+.float-anim-a { animation: floatDrift 6.5s ease-in-out infinite; }
+.float-anim-b { animation: floatDrift 7.5s ease-in-out infinite; animation-delay: -2.1s; }
+.float-anim-c { animation: floatDrift 7s ease-in-out infinite; animation-delay: -4s; }
+.float-anim-d { animation: floatDrift 8s ease-in-out infinite; animation-delay: -1.3s; }
+
+@keyframes floatDrift {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-16px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .float-anim-a, .float-anim-b, .float-anim-c, .float-anim-d { animation: none !important; }
+}
+
+@media (max-width: 1100px) {
+  .hero-media-float { display: none; }
+}
+
 /* =========================================================
    右下角浮层开关：背景风格（Minimal/Vivid） + 视觉密度（Light/Bold）
    ========================================================= */
@@ -886,7 +982,8 @@ body[data-bg="vivid"] .btn-outline {
   gap: 10px;
 }
 .bgstyle-toggle,
-.density-toggle {
+.density-toggle,
+.media-layout-toggle {
   display: flex; align-items: center; gap: 8px;
   background: #ffffff;
   border: 1px solid var(--border-default);
@@ -895,7 +992,8 @@ body[data-bg="vivid"] .btn-outline {
   box-shadow: var(--shadow-md);
 }
 .bgstyle-toggle button,
-.density-toggle button {
+.density-toggle button,
+.media-layout-toggle button {
   height: 32px; padding: 0 16px;
   border-radius: var(--radius-pill);
   font-family: var(--font-ui);
@@ -905,10 +1003,14 @@ body[data-bg="vivid"] .btn-outline {
   transition: background var(--dur-fast) var(--ease-standard), color var(--dur-fast) var(--ease-standard);
 }
 .bgstyle-toggle button.is-active,
-.density-toggle button.is-active {
+.density-toggle button.is-active,
+.media-layout-toggle button.is-active {
   background: var(--ink);
   color: #fff;
 }
+/* Float 排版对比选项仅在 Minimal 背景下有意义（Vivid 背景色块已铺满，不需要图片排版）；
+   Vivid 模式下自动隐藏该开关 */
+body[data-bg="vivid"] .media-layout-toggle { display: none; }
 
 /* =========================================================
    主体区块（白底圆角大卡片）

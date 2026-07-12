@@ -209,6 +209,32 @@
   });
 
   /* ---------------------------------------------------------
+     4.5 首屏图片排版切换：Scroll（横向滚动条带） / Float（左右两侧漂浮卡片）
+     仅在 Minimal 背景下开放；切到 Vivid 时强制回退为 Scroll（开关本身也会隐藏）
+  --------------------------------------------------------- */
+  var mediaLayoutBtns = document.querySelectorAll('.media-layout-toggle button');
+
+  function setMediaLayout(layout) {
+    if (!layout || body.getAttribute('data-media-layout') === layout) return;
+    body.setAttribute('data-media-layout', layout);
+    mediaLayoutBtns.forEach(function (btn) {
+      btn.classList.toggle('is-active', btn.getAttribute('data-media-layout') === layout);
+    });
+  }
+
+  mediaLayoutBtns.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      setMediaLayout(btn.getAttribute('data-media-layout'));
+    });
+  });
+
+  var _setBgStyleOrig = setBgStyle;
+  setBgStyle = function (styleName) {
+    _setBgStyleOrig(styleName);
+    if (styleName === 'vivid') setMediaLayout('scroll');
+  };
+
+  /* ---------------------------------------------------------
      5. 合作伙伴墙内容填充（横向 marquee，复制两份实现无缝循环）
   --------------------------------------------------------- */
   var PARTNER_ICON_IDS = [8, 119, 120, 148, 122, 146, 147, 149, 24, 33];
