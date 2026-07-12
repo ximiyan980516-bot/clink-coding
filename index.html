@@ -143,6 +143,76 @@ true,
           <a href="#" class="cta-btn cta-primary">Start Building <svg viewBox="0 0 20 20" fill="none"><path d="M16.665 10H3.332M12.5 5.833L16.665 10 12.5 14.167" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
           <a href="#" class="cta-btn cta-secondary">Explore Agent Payments <svg viewBox="0 0 20 20" fill="none"><path d="M16.665 10H3.332M12.5 5.833L16.665 10 12.5 14.167" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
         </div>
+
+        <!-- 首屏图片滚动区域：位于 CTA 按钮下方，首屏仅露出卡片顶部一小部分，
+             提示可继续下滑；Human 模式为产品/生活图片，切换 Agent 模式后变为代码窗口卡片 -->
+        <div class="hero-media-peek">
+          <div class="hero-media-viewport">
+            <div class="hero-media-row hero-media-row--photos anim-x">
+              <div class="hero-media-card"><img src="assets/images/hero-media/cards-colorful.png" alt="" onerror="this.parentElement.style.display='none'"></div>
+              <div class="hero-media-card hero-media-card--tall"><img src="assets/images/hero-media/coin.png" alt="" onerror="this.parentElement.style.display='none'"></div>
+              <div class="hero-media-card hero-media-card--narrow"><img src="assets/images/hero-media/woman-laptop.png" alt="" onerror="this.parentElement.style.display='none'"></div>
+              <div class="hero-media-card"><img src="assets/images/hero-media/card-silver.png" alt="" onerror="this.parentElement.style.display='none'"></div>
+              <div class="hero-media-card"><img src="assets/images/hero-media/man-phone.png" alt="" onerror="this.parentElement.style.display='none'"></div>
+              <div class="hero-media-card"><img src="assets/images/hero-media/cards-colorful.png" alt="" onerror="this.parentElement.style.display='none'"></div>
+              <div class="hero-media-card hero-media-card--tall"><img src="assets/images/hero-media/coin.png" alt="" onerror="this.parentElement.style.display='none'"></div>
+              <div class="hero-media-card hero-media-card--narrow"><img src="assets/images/hero-media/woman-laptop.png" alt="" onerror="this.parentElement.style.display='none'"></div>
+              <div class="hero-media-card"><img src="assets/images/hero-media/card-silver.png" alt="" onerror="this.parentElement.style.display='none'"></div>
+              <div class="hero-media-card"><img src="assets/images/hero-media/man-phone.png" alt="" onerror="this.parentElement.style.display='none'"></div>
+            </div>
+
+            <div class="hero-media-row hero-media-row--code anim-x">
+              <div class="code-window-card"><div class="code-window-card__bar"><span></span><span></span><span></span></div><pre class="code-window-card__body">async def
+pay(agent,
+  amount):
+  await
+  charge()</pre></div>
+              <div class="code-window-card"><div class="code-window-card__bar"><span></span><span></span><span></span></div><pre class="code-window-card__body">retry_count
+= 0
+while
+not ok:
+  send()</pre></div>
+              <div class="code-window-card"><div class="code-window-card__bar"><span></span><span></span><span></span></div><pre class="code-window-card__body">class Agent:
+def init(
+  self,
+  key):
+  ...</pre></div>
+              <div class="code-window-card"><div class="code-window-card__bar"><span></span><span></span><span></span></div><pre class="code-window-card__body">status:
+"settled"
+tx_id: None
+amount:
+128.50</pre></div>
+              <div class="code-window-card"><div class="code-window-card__bar"><span></span><span></span><span></span></div><pre class="code-window-card__body">for tx in
+queue:
+  process(
+  tx)</pre></div>
+              <div class="code-window-card"><div class="code-window-card__bar"><span></span><span></span><span></span></div><pre class="code-window-card__body">async def
+pay(agent,
+  amount):
+  await
+  charge()</pre></div>
+              <div class="code-window-card"><div class="code-window-card__bar"><span></span><span></span><span></span></div><pre class="code-window-card__body">retry_count
+= 0
+while
+not ok:
+  send()</pre></div>
+              <div class="code-window-card"><div class="code-window-card__bar"><span></span><span></span><span></span></div><pre class="code-window-card__body">class Agent:
+def init(
+  self,
+  key):
+  ...</pre></div>
+              <div class="code-window-card"><div class="code-window-card__bar"><span></span><span></span><span></span></div><pre class="code-window-card__body">status:
+"settled"
+tx_id: None
+amount:
+128.50</pre></div>
+              <div class="code-window-card"><div class="code-window-card__bar"><span></span><span></span><span></span></div><pre class="code-window-card__body">for tx in
+queue:
+  process(
+  tx)</pre></div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
