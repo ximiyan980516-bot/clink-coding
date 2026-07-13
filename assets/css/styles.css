@@ -450,8 +450,8 @@ body[data-mode="agent"] .btn-outline {
    可见像素块仅保留在画面四边极窄的边缘带 */
 .hero-canvas-bg.square-grid-canvas {
   opacity: 1;
-  -webkit-mask-image: radial-gradient(ellipse 82% 70% at 50% 46%, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 55%, rgba(255,255,255,0.12) 72%, rgba(255,255,255,0.35) 85%, rgba(255,255,255,0.6) 95%, rgba(255,255,255,1) 100%);
-  mask-image: radial-gradient(ellipse 82% 70% at 50% 46%, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 55%, rgba(255,255,255,0.12) 72%, rgba(255,255,255,0.35) 85%, rgba(255,255,255,0.6) 95%, rgba(255,255,255,1) 100%);
+  -webkit-mask-image: radial-gradient(ellipse 82% 70% at 50% 46%, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 55%, rgba(255,255,255,0.35) 75%, rgba(255,255,255,0.65) 88%, rgba(255,255,255,1) 100%);
+  mask-image: radial-gradient(ellipse 82% 70% at 50% 46%, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 55%, rgba(255,255,255,0.35) 75%, rgba(255,255,255,0.65) 88%, rgba(255,255,255,1) 100%);
 }
 
 .hero-inner {
