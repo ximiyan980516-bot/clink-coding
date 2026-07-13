@@ -446,12 +446,12 @@ body[data-mode="agent"] .btn-outline {
   transition: opacity var(--dur-theme) var(--ease-standard);
 }
 /* 标题区域弱化：用径向遮罩让方块在标题所在的中心区域完全隐藏，四周保持原有饱和度，
-   避免视觉元素与标题文案打架；椭圆放大到 82% × 70%，大面积让出中央标题区，
-   可见像素块仅保留在画面四边极窄的边缘带 */
+   避免视觉元素与标题文案打架；椭圆缩小到 62% × 50%，可见像素从稍靠近中心的位置
+   就开始出现，保证像素块的视觉存在感又不干扰标题 */
 .hero-canvas-bg.square-grid-canvas {
   opacity: 1;
-  -webkit-mask-image: radial-gradient(ellipse 82% 70% at 50% 46%, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 55%, rgba(255,255,255,0.35) 75%, rgba(255,255,255,0.65) 88%, rgba(255,255,255,1) 100%);
-  mask-image: radial-gradient(ellipse 82% 70% at 50% 46%, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 55%, rgba(255,255,255,0.35) 75%, rgba(255,255,255,0.65) 88%, rgba(255,255,255,1) 100%);
+  -webkit-mask-image: radial-gradient(ellipse 62% 50% at 50% 46%, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 42%, rgba(255,255,255,0.3) 62%, rgba(255,255,255,0.6) 78%, rgba(255,255,255,1) 100%);
+  mask-image: radial-gradient(ellipse 62% 50% at 50% 46%, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 42%, rgba(255,255,255,0.3) 62%, rgba(255,255,255,0.6) 78%, rgba(255,255,255,1) 100%);
 }
 
 .hero-inner {
