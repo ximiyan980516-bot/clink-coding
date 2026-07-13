@@ -76,7 +76,7 @@
   --font-mono: 'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace;
 
   /* ---------- 字号分级（参照 Vercel Heading/Label/Copy/Button 逻辑，融合 Figma 字重）---------- */
-  --fs-hero-title: clamp(40px, 6.4vw, 84px);
+  --fs-hero-title: clamp(40px, 6.4vw, 92px);
   --fs-h1: clamp(28px, 2.8vw, 40px);
   --fs-h2: clamp(24px, 2.2vw, 36px);
   --fs-h3: 24px;
@@ -461,6 +461,9 @@ body[data-mode="agent"] .btn-outline {
   align-items: center;
   justify-content: center;
   padding-bottom: 16vh;
+  /* 自身不拦截指针事件，让下层 z-index:1 的散落代码片段可以被悬浮命中；
+     真正需要交互的内容（开关、按钮等）在 .hero-center 上重新开启 */
+  pointer-events: none;
 }
 
 .hero-center {
@@ -472,6 +475,7 @@ body[data-mode="agent"] .btn-outline {
   flex-direction: column;
   align-items: center;
   text-align: center;
+  pointer-events: auto;
 }
 
 .hero-title {
@@ -723,7 +727,10 @@ body[data-bg="vivid"] .btn-outline {
   line-height: 1.55;
   opacity: 0.34;
   text-align: center;
+  pointer-events: auto;
+  cursor: default;
   animation: codeFragFloat 7s ease-in-out infinite;
+  transition: opacity var(--dur-base) var(--ease-standard), color var(--dur-base) var(--ease-standard);
 }
 .hero-code-deco .code-frag:nth-of-type(2) { animation-delay: -1.2s; }
 .hero-code-deco .code-frag:nth-of-type(3) { animation-delay: -2.6s; }
@@ -731,9 +738,13 @@ body[data-bg="vivid"] .btn-outline {
 .hero-code-deco .code-frag:nth-of-type(5) { animation-delay: -3.4s; }
 .hero-code-deco .code-frag:nth-of-type(6) { animation-delay: -4.1s; }
 .hero-code-deco .code-frag:nth-of-type(7) { animation-delay: -2s; }
+.hero-code-deco .code-frag:hover {
+  opacity: 1;
+  color: rgba(255, 255, 255, 0.5);
+}
 
 /* 切换到 AI Agents 模式时：散落代码片段从模糊/轻微下沉状态浮现出来，
-   与已有的漂浮动画（codeFragFloat，作用于 transform）叠加运行，互不冲突，
+   与持续的轻微漂浮动画（codeFragFloat，作用于 transform）叠加运行，互不冲突，
    因为入场动画用的是独立的 translate/scale/filter 属性 */
 .hero-code-deco .code-frag.is-revealing {
   animation: codeFragReveal 0.7s var(--ease-standard) both, codeFragFloat 7s ease-in-out infinite;
@@ -741,6 +752,11 @@ body[data-bg="vivid"] .btn-outline {
 @keyframes codeFragReveal {
   0% { opacity: 0; filter: blur(6px); translate: 0 16px; }
   100% { opacity: 0.34; filter: blur(0); translate: 0 0; }
+}
+
+@keyframes codeFragFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
 }
 
 .hero-code-deco .ascii-art {
@@ -770,11 +786,6 @@ body[data-bg="vivid"] .btn-outline {
   100% { opacity: 0.5; scale: 1; filter: blur(0) drop-shadow(0 0 18px rgba(155, 121, 251, 0.35)); }
 }
 
-@keyframes codeFragFloat {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
-}
-
 @media (prefers-reduced-motion: reduce) {
   .hero-code-deco .code-frag { animation: none !important; }
   .hero-code-deco .code-frag.is-revealing,
@@ -783,190 +794,6 @@ body[data-bg="vivid"] .btn-outline {
 
 @media (max-width: 900px) {
   .hero-code-deco { display: none; }
-}
-
-/* =========================================================
-   首屏图片/代码滚动区：位于 CTA 按钮下方，靠 .hero 的 overflow:hidden
-   裁切出「仅露出顶部一角」的效果，提示继续下滑；
-   Human 模式滚动展示产品/生活图片，Agent 模式替换为代码窗口卡片
-   ========================================================= */
-.hero-media-peek {
-  position: relative;
-  width: 100vw;
-  margin-top: 20px;
-  height: 192px;
-  overflow: hidden;
-  pointer-events: none;
-}
-
-.hero-media-viewport {
-  position: relative;
-  overflow: hidden;
-  width: 100%;
-  height: 100%;
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
-  mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
-}
-
-.hero-media-row {
-  display: flex;
-  align-items: flex-start;
-  gap: 18px;
-  width: max-content;
-  will-change: transform;
-}
-.hero-media-row.anim-x { animation: marquee-x 40s linear infinite; }
-.hero-media-row--code { display: none; }
-.hero[data-mode="agent"] .hero-media-row--photos { display: none; }
-.hero[data-mode="agent"] .hero-media-row--code { display: flex; }
-
-.hero-media-card {
-  flex-shrink: 0;
-  width: 190px;
-  height: 148px;
-  border-radius: 20px;
-  overflow: hidden;
-  background: #EFEFEF;
-  box-shadow: 0 20px 44px rgba(17, 22, 34, 0.16);
-}
-.hero-media-card img { width: 100%; height: 100%; object-fit: cover; }
-.hero-media-card--tall { height: 188px; }
-.hero-media-card--narrow { width: 116px; }
-
-.code-window-card {
-  flex-shrink: 0;
-  width: 190px;
-  height: 148px;
-  border-radius: 20px;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  background: #14141A;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 20px 44px rgba(0, 0, 0, 0.4);
-}
-.code-window-card__bar {
-  display: flex;
-  gap: 6px;
-  padding: 10px 12px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-  flex-shrink: 0;
-}
-.code-window-card__bar span {
-  width: 8px; height: 8px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.2);
-}
-.code-window-card__body {
-  margin: 0;
-  padding: 12px 14px;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  line-height: 1.55;
-  color: var(--cool-violet);
-  white-space: pre;
-  opacity: 0.85;
-  overflow: hidden;
-}
-
-@media (max-width: 900px) {
-  .hero-media-peek { display: none; }
-}
-
-/* Scroll/Float 排版切换：默认展示滚动版（.hero-media-peek），
-   Float 模式下隐藏滚动版、显示左右浮动版；仅 Minimal 背景下开放该切换，
-   Vivid 背景下始终使用滚动版且开关自动隐藏 */
-body[data-media-layout="float"] .hero-media-peek { display: none; }
-
-/* =========================================================
-   Float 排版方案：4 张卡片分布在 Hero 左右两侧（贴近参考图 6/9/10/11.png 的
-   四角散落构图），带轻微、各自不同步的上下漂浮动效；
-   Human 模式展示产品图片，Agent 模式自动替换为代码窗口卡片
-   ========================================================= */
-.hero-media-float {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  overflow: hidden;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity var(--dur-theme) var(--ease-standard);
-}
-body[data-media-layout="float"] .hero-media-float { opacity: 1; }
-
-.float-card,
-.float-code {
-  position: absolute;
-  width: 200px;
-  height: 200px;
-  overflow: hidden;
-}
-.float-card {
-  background: #EFEFEF;
-  box-shadow: 0 20px 44px rgba(17, 22, 34, 0.16);
-}
-.float-card img { width: 100%; height: 100%; object-fit: cover; display: block; }
-
-.float-code {
-  display: flex;
-  flex-direction: column;
-  border-radius: 20px;
-  background: #14141A;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 20px 44px rgba(0, 0, 0, 0.4);
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity var(--dur-theme) var(--ease-standard);
-}
-.hero[data-mode="agent"] .float-card { opacity: 0; visibility: hidden; }
-.hero[data-mode="agent"] .float-code { opacity: 1; visibility: visible; }
-
-.float-code .code-window-card__bar {
-  display: flex;
-  gap: 6px;
-  padding: 10px 12px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-  flex-shrink: 0;
-}
-.float-code .code-window-card__bar span {
-  width: 8px; height: 8px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.2);
-}
-.float-code .code-window-card__body {
-  margin: 0;
-  padding: 12px 14px;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  line-height: 1.55;
-  color: var(--cool-violet);
-  white-space: pre;
-  opacity: 0.85;
-  overflow: hidden;
-}
-
-/* 四角定位：左上/左下贴左侧，右上/右下贴右侧，避免遮挡中央文案 */
-.float-card--tl, .float-code--tl { left: 4%; top: 12%; }
-.float-card--bl, .float-code--bl { left: 6%; top: 60%; width: 168px; height: 168px; }
-.float-card--tr, .float-code--tr { right: 3%; top: 8%; width: 178px; height: 178px; }
-.float-card--br, .float-code--br { right: 1%; top: 58%; }
-
-.float-anim-a { animation: floatDrift 6.5s ease-in-out infinite; }
-.float-anim-b { animation: floatDrift 7.5s ease-in-out infinite; animation-delay: -2.1s; }
-.float-anim-c { animation: floatDrift 7s ease-in-out infinite; animation-delay: -4s; }
-.float-anim-d { animation: floatDrift 8s ease-in-out infinite; animation-delay: -1.3s; }
-
-@keyframes floatDrift {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-16px); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .float-anim-a, .float-anim-b, .float-anim-c, .float-anim-d { animation: none !important; }
-}
-
-@media (max-width: 1100px) {
-  .hero-media-float { display: none; }
 }
 
 /* =========================================================
@@ -982,8 +809,7 @@ body[data-media-layout="float"] .hero-media-float { opacity: 1; }
   gap: 10px;
 }
 .bgstyle-toggle,
-.density-toggle,
-.media-layout-toggle {
+.density-toggle {
   display: flex; align-items: center; gap: 8px;
   background: #ffffff;
   border: 1px solid var(--border-default);
@@ -992,8 +818,7 @@ body[data-media-layout="float"] .hero-media-float { opacity: 1; }
   box-shadow: var(--shadow-md);
 }
 .bgstyle-toggle button,
-.density-toggle button,
-.media-layout-toggle button {
+.density-toggle button {
   height: 32px; padding: 0 16px;
   border-radius: var(--radius-pill);
   font-family: var(--font-ui);
@@ -1003,14 +828,10 @@ body[data-media-layout="float"] .hero-media-float { opacity: 1; }
   transition: background var(--dur-fast) var(--ease-standard), color var(--dur-fast) var(--ease-standard);
 }
 .bgstyle-toggle button.is-active,
-.density-toggle button.is-active,
-.media-layout-toggle button.is-active {
+.density-toggle button.is-active {
   background: var(--ink);
   color: #fff;
 }
-/* Float 排版对比选项仅在 Minimal 背景下有意义（Vivid 背景色块已铺满，不需要图片排版）；
-   Vivid 模式下自动隐藏该开关 */
-body[data-bg="vivid"] .media-layout-toggle { display: none; }
 
 /* =========================================================
    主体区块（白底圆角大卡片）

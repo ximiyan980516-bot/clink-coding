@@ -21,11 +21,11 @@
   /* Human / AI Agents 两种模式下的主标题与副标题文案 */
   var HERO_COPY = {
     human: {
-      title: 'Global payments for<br />Humans &amp; Agents',
+      title: 'Global payments<br />for<br />Humans &amp; Agents',
       subtitle: 'Sell to people today, and agents tomorrow, with one global payment platform.'
     },
     agent: {
-      title: 'Payments for a world<br />where agents buy',
+      title: 'Payments for<br />a world<br />where agents buy',
       subtitle: 'Let agents discover, authorize, and pay for your products through agent-native commerce flows.'
     }
   };
@@ -50,7 +50,11 @@
       cellGap: 0,
       cornerRadius: 0,
       idleVisibleRatio: 0.06,
-      loop: true
+      loop: false,
+      flickerChance: 0,
+      // 仅 Human 模式下，靠近鼠标的彩色像素会拉伸为银行卡比例，暗示支付产品；
+      // Agent 模式关闭（呼应代码风格的静态点阵，不需要这个联想动效）
+      hoverCardStretch: body.getAttribute('data-mode') !== 'agent'
     });
     heroNet.start();
   }
@@ -79,9 +83,15 @@
 
     codeFrags.forEach(function (el, i) {
       el.classList.remove('is-revealing');
-      el.style.animationDelay = (i * 0.05) + 's, 0s';
+      el.style.animationDelay = (i * 0.05) + 's';
       void el.offsetWidth;
       el.classList.add('is-revealing');
+      // 入场动画（animation-fill-mode: both）结束后移除类名，
+      // 避免动画的 fill 值一直覆盖 :hover 状态下的 opacity/color 过渡
+      el.addEventListener('animationend', function handler() {
+        el.classList.remove('is-revealing');
+        el.removeEventListener('animationend', handler);
+      });
     });
 
     if (asciiArt) {
@@ -106,6 +116,7 @@
 
     if (heroNet) {
       heroNet.setPalette(mode === 'agent' ? PALETTE_AGENT : PALETTE_HUMAN);
+      heroNet.setHoverCardStretch(mode !== 'agent');
       // 切换模式时让背景方块重新走一遍生长入场，呼应模式切换的视觉反馈
       heroNet.replay();
     }
@@ -207,32 +218,6 @@
       setDensity(btn.getAttribute('data-density'));
     });
   });
-
-  /* ---------------------------------------------------------
-     4.5 首屏图片排版切换：Scroll（横向滚动条带） / Float（左右两侧漂浮卡片）
-     仅在 Minimal 背景下开放；切到 Vivid 时强制回退为 Scroll（开关本身也会隐藏）
-  --------------------------------------------------------- */
-  var mediaLayoutBtns = document.querySelectorAll('.media-layout-toggle button');
-
-  function setMediaLayout(layout) {
-    if (!layout || body.getAttribute('data-media-layout') === layout) return;
-    body.setAttribute('data-media-layout', layout);
-    mediaLayoutBtns.forEach(function (btn) {
-      btn.classList.toggle('is-active', btn.getAttribute('data-media-layout') === layout);
-    });
-  }
-
-  mediaLayoutBtns.forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      setMediaLayout(btn.getAttribute('data-media-layout'));
-    });
-  });
-
-  var _setBgStyleOrig = setBgStyle;
-  setBgStyle = function (styleName) {
-    _setBgStyleOrig(styleName);
-    if (styleName === 'vivid') setMediaLayout('scroll');
-  };
 
   /* ---------------------------------------------------------
      5. 合作伙伴墙内容填充（横向 marquee，复制两份实现无缝循环）
