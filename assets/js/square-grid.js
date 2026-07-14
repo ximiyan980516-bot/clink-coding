@@ -46,17 +46,10 @@
         palette: ['#FB8120', '#F691DF'],
         growDuration: 900,
         maxStagger: 1200,
-        loop: true,
         cellGap: 0,
         cornerRadius: 0,
         idleVisibleRatio: 0.07,
-        idleAlpha: [1, 1],
-        pulseSpeed: [5200, 9000],
-        hoverRadius: 160,
-        hoverAlpha: [1, 1],
-        flickerChance: 0.045,
-        flickerCooldown: 900,
-        flickerDecay: 0.94
+        idleAlpha: [1, 1]
       }, options || {});
 
       this._running = false;
@@ -66,12 +59,7 @@
       this._dpr = Math.min(window.devicePixelRatio || 1, 2);
       this._reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-      this._mouseX = -9999;
-      this._mouseY = -9999;
-      this._mouseActive = false;
-
       this._onResize = this._onResize.bind(this);
-      this._onMouseMove = this._onMouseMove.bind(this);
       this._tick = this._tick.bind(this);
 
       this._resizeObserver = null;
@@ -81,8 +69,6 @@
       } else {
         window.addEventListener('resize', this._onResize);
       }
-
-      window.addEventListener('mousemove', this._onMouseMove, { passive: true });
 
       this._onResize();
       this._generateCells();
@@ -96,19 +82,6 @@
       this.canvas.height = this._h * this._dpr;
       this.ctx.setTransform(this._dpr, 0, 0, this._dpr, 0, 0);
       if (this._cells.length) this._generateCells();
-    }
-
-    _onMouseMove(e) {
-      const rect = this.canvas.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      if (x < 0 || y < 0 || x > rect.width || y > rect.height) {
-        this._mouseActive = false;
-        return;
-      }
-      this._mouseX = x;
-      this._mouseY = y;
-      this._mouseActive = true;
     }
 
     _generateCells() {
@@ -129,13 +102,8 @@
             cy: r * cellH + cellH / 2,
             colorT: Math.random(),
             delay: Math.random() * this.opts.maxStagger,
-            phase: Math.random() * Math.PI * 2,
-            pulseDur: lerp(this.opts.pulseSpeed[0], this.opts.pulseSpeed[1], Math.random()),
             idleVisible: Math.random() < this.opts.idleVisibleRatio,
-            idleA: lerp(this.opts.idleAlpha[0], this.opts.idleAlpha[1], Math.random()),
-            flashAlpha: 0,
-            flashTarget: 0,
-            flashCooldownUntil: 0
+            idleA: lerp(this.opts.idleAlpha[0], this.opts.idleAlpha[1], Math.random())
           });
         }
       }
@@ -179,7 +147,6 @@
       this.stop();
       if (this._resizeObserver) this._resizeObserver.disconnect();
       else window.removeEventListener('resize', this._onResize);
-      window.removeEventListener('mousemove', this._onMouseMove);
     }
 
     _drawCell(cell, alpha, blur) {
@@ -244,48 +211,13 @@
         const entrance = clamp01((elapsed - cell.delay) / this.opts.growDuration);
         const eEnt = easeOutCubic(entrance);
 
-        // 静息态：仅少量方块可见，保持高饱和纯色，配合呼吸节奏产生动感模糊辉光
-        let idlePart = 0;
-        let pulse = 0;
+        // 静息态：仅少量方块可见，保持高饱和纯色
+        let alpha = 0;
         if (cell.idleVisible) {
-          idlePart = eEnt * cell.idleA;
-          if (this.opts.loop) {
-            const pulseT = (((now * 0.001 * 1000) + cell.phase * 1000) % cell.pulseDur) / cell.pulseDur;
-            pulse = (Math.sin(pulseT * Math.PI * 2) + 1) / 2;
-            idlePart = eEnt * cell.idleA;
-          }
+          alpha = easeOutCubic(clamp01((elapsed - cell.delay) / this.opts.growDuration)) * cell.idleA;
         }
 
-        // 鼠标划过：邻近方块低频、柔和地随机点亮（带冷却，避免高频闪烁）
-        if (mouseActive) {
-          const dx = cell.cx - mx, dy = cell.cy - my;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < radius && now > cell.flashCooldownUntil) {
-            const proximity = 1 - dist / radius;
-            if (Math.random() < this.opts.flickerChance * proximity) {
-              cell.flashTarget = lerp(this.opts.hoverAlpha[0], this.opts.hoverAlpha[1], proximity);
-              cell.flashCooldownUntil = now + this.opts.flickerCooldown + Math.random() * 600;
-            }
-          }
-        }
-
-        // 柔和过渡：缓慢上升到目标亮度，再按衰减系数缓慢熄灭
-        cell.flashAlpha = lerp(cell.flashAlpha, cell.flashTarget, 0.06);
-        cell.flashTarget *= this.opts.flickerDecay;
-
-        let alpha = Math.max(idlePart, cell.flashAlpha);
-        // 动感模糊辉光：静息呼吸的波峰 + 鼠标点亮的闪烁都会放大模糊半径，
-        // 制造类似运动光斑的效果，方块本身始终保持满饱和纯色
-        const blur = alpha > 0.002
-          ? lerp(2, 16, pulse) + cell.flashAlpha * 22
-          : 0;
-
-        this._drawCell(cell, alpha, blur);
-
-        if (cell.flashAlpha < 0.003) {
-          cell.flashAlpha = 0;
-          cell.flashTarget = 0;
-        }
+        this._drawCell(cell, alpha, 0);
       });
 
       this._rafId = requestAnimationFrame(this._tick);

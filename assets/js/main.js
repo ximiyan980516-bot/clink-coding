@@ -49,9 +49,7 @@
       palette: body.getAttribute('data-mode') === 'agent' ? PALETTE_AGENT : PALETTE_HUMAN,
       cellGap: 0,
       cornerRadius: 0,
-      idleVisibleRatio: 0.02,
-      loop: false,
-      flickerChance: 0
+      idleVisibleRatio: 0.02
     });
     heroNet.start();
   }
