@@ -54,9 +54,9 @@
         pulseSpeed: [5200, 9000],
         hoverRadius: 160,
         hoverAlpha: [1, 1],
-        flickerChance: 0.045,
-        flickerCooldown: 900,
-        flickerDecay: 0.94
+        flickerChance: 0.025,
+        flickerCooldown: 1500,
+        flickerDecay: 0.97
       }, options || {});
 
       this._running = false;
