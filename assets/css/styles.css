@@ -1357,6 +1357,44 @@ body[data-mode="agent"] .logo-card img { filter: brightness(0) invert(1); opacit
 }
 
 /* =========================================================
+   CTA 区块：位于 Footer 上方，号召用户立即行动
+   ========================================================= */
+.cta-block {
+  padding: 100px 0 80px;
+  text-align: center;
+  background: var(--page-bg);
+}
+
+.cta-block__title {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(32px, 4vw, 60px);
+  line-height: 1.08;
+  margin: 0 0 16px;
+  color: var(--text-primary);
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cta-block__desc {
+  font-family: var(--font-body);
+  font-size: var(--fs-body-lg);
+  color: var(--text-secondary);
+  margin: 0 auto 40px;
+  max-width: 600px;
+  line-height: 1.55;
+}
+
+.cta-block__actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
+/* =========================================================
    Footer
    ========================================================= */
 .site-footer {
