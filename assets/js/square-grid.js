@@ -56,14 +56,7 @@
         hoverAlpha: [1, 1],
         flickerChance: 0.045,
         flickerCooldown: 900,
-        flickerDecay: 0.94,
-        // 鼠标靠近时，静息可见（彩色）方块从正方形拉伸为银行卡横向比例
-        // （标准卡片比例 85.60 x 53.98mm ≈ 1.586:1），暗示这是一款支付产品；
-        // 仅在 hoverCardStretch 开启时生效（按模式动态开关，Agent 模式下关闭）
-        hoverCardStretch: false,
-        cardStretchRadius: 170,
-        cardAspect: 1.586,
-        cardCornerRadius: 4
+        flickerDecay: 0.94
       }, options || {});
 
       this._running = false;
@@ -142,9 +135,7 @@
             idleA: lerp(this.opts.idleAlpha[0], this.opts.idleAlpha[1], Math.random()),
             flashAlpha: 0,
             flashTarget: 0,
-            flashCooldownUntil: 0,
-            cardT: 0,
-            cardTargetT: 0
+            flashCooldownUntil: 0
           });
         }
       }
@@ -153,14 +144,6 @@
 
     setPalette(palette) {
       this.opts.palette = palette;
-    }
-
-    /* 开关“靠近鼠标时拉伸为银行卡比例”的交互效果（Human 模式开启，Agent 模式关闭） */
-    setHoverCardStretch(enabled) {
-      this.opts.hoverCardStretch = !!enabled;
-      if (!enabled) {
-        this._cells.forEach(cell => { cell.cardTargetT = 0; });
-      }
     }
 
     setDensity(density) {
@@ -199,24 +182,13 @@
       window.removeEventListener('mousemove', this._onMouseMove);
     }
 
-    _drawCell(cell, alpha, blur, cardT) {
+    _drawCell(cell, alpha, blur) {
       if (alpha <= 0.002) return;
       const ctx = this.ctx;
       const gap = this.opts.cellGap;
-      const baseRx = this.opts.cornerRadius;
-      const baseW = Math.max(0, cell.w - gap), baseH = Math.max(0, cell.h - gap);
-
-      // cardT (0~1)：从原始正方形位移拉伸为银行卡横向比例，
-      // 保持中心点不变、面积大致不变，两端同步向外延展宽度、收窄高度
-      let w = baseW, h = baseH, rx = baseRx;
-      if (cardT > 0.001) {
-        const t = cardT;
-        const stretch = Math.sqrt(this.opts.cardAspect);
-        w = lerp(baseW, baseW * stretch, t);
-        h = lerp(baseH, baseH / stretch, t);
-        rx = lerp(baseRx, this.opts.cardCornerRadius, t);
-      }
-      const x = cell.cx - w / 2, y = cell.cy - h / 2;
+      const rx = this.opts.cornerRadius;
+      const w = Math.max(0, cell.w - gap), h = Math.max(0, cell.h - gap);
+      const x = cell.x + gap / 2, y = cell.y + gap / 2;
 
       const [c1, c2] = this.opts.palette;
       const rgb = mixColor(c1, c2, cell.colorT);
@@ -308,23 +280,7 @@
           ? lerp(2, 16, pulse) + cell.flashAlpha * 22
           : 0;
 
-        // 彩色（静息可见）方块靠近鼠标时，从正方形位移拉伸为银行卡横向比例，
-        // 暗示这是一款支付产品；离开鼠标范围后缓慢恢复为正方形
-        if (this.opts.hoverCardStretch && cell.idleVisible) {
-          const cardRadius = this.opts.cardStretchRadius;
-          if (mouseActive) {
-            const dx2 = cell.cx - mx, dy2 = cell.cy - my;
-            const dist2 = Math.sqrt(dx2 * dx2 + dy2 * dy2);
-            cell.cardTargetT = dist2 < cardRadius ? (1 - dist2 / cardRadius) : 0;
-          } else {
-            cell.cardTargetT = 0;
-          }
-        } else {
-          cell.cardTargetT = 0;
-        }
-        cell.cardT = lerp(cell.cardT, cell.cardTargetT, 0.12);
-
-        this._drawCell(cell, alpha, blur, cell.cardT);
+        this._drawCell(cell, alpha, blur);
 
         if (cell.flashAlpha < 0.003) {
           cell.flashAlpha = 0;

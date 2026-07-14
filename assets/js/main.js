@@ -51,10 +51,7 @@
       cornerRadius: 0,
       idleVisibleRatio: 0.02,
       loop: false,
-      flickerChance: 0,
-      // 仅 Human 模式下，靠近鼠标的彩色像素会拉伸为银行卡比例，暗示支付产品；
-      // Agent 模式关闭（呼应代码风格的静态点阵，不需要这个联想动效）
-      hoverCardStretch: body.getAttribute('data-mode') !== 'agent'
+      flickerChance: 0
     });
     heroNet.start();
   }
@@ -116,7 +113,6 @@
 
     if (heroNet) {
       heroNet.setPalette(mode === 'agent' ? PALETTE_AGENT : PALETTE_HUMAN);
-      heroNet.setHoverCardStretch(mode !== 'agent');
       // 切换模式时让背景方块重新走一遍生长入场，呼应模式切换的视觉反馈
       heroNet.replay();
     }
