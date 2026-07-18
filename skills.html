@@ -289,6 +289,122 @@
     .sk-browse__header { flex-direction: column; align-items: flex-start; }
     .sk-browse__title { font-size: 28px; }
   }
+
+  /* ---- 真实技能卡片 ---- */
+  .sk-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+  }
+
+  .sk-card {
+    background: var(--sk-card);
+    border: 1px solid var(--sk-border);
+    border-radius: 16px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    cursor: pointer;
+    transition: box-shadow 200ms, transform 200ms;
+  }
+  .sk-card:hover {
+    box-shadow: 0 8px 28px rgba(0,0,0,0.07);
+    transform: translateY(-2px);
+  }
+
+  .sk-card__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 4px;
+  }
+
+  .sk-card__icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: var(--sk-orange-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+  }
+
+  /* 标签：font_caption 12px */
+  .sk-card__tag {
+    display: inline-flex;
+    align-items: center;
+    font-family: var(--font-body);
+    font-size: 12px;           /* font_caption */
+    font-weight: 500;
+    line-height: 16px;
+    padding: 3px 10px;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+  .sk-card__tag--free { background: #F0FDF4; color: #166534; border: 1px solid #BBF7D0; }
+  .sk-card__tag--paid { background: var(--sk-orange-light); color: #7A3B00; border: 1px solid var(--sk-orange); }
+
+  /* 卡片标题：font_heading_sm 24px → 16px（卡片场景） Medium */
+  .sk-card__name {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 16px;           /* font_heading_sm 在卡片中缩小适配 */
+    line-height: 1.35;
+    color: var(--sk-text-primary);
+    margin: 0;
+  }
+
+  /* 描述：font_body_mini 14px Regular */
+  .sk-card__desc {
+    font-family: var(--font-body);
+    font-size: 14px;           /* font_body_mini */
+    line-height: 20px;
+    color: var(--sk-text-secondary);
+    margin: 0;
+    flex: 1;
+  }
+
+  .sk-card__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 12px;
+    border-top: 1px solid var(--sk-border);
+    margin-top: 4px;
+  }
+
+  .sk-card__publisher {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-family: var(--font-body);
+    font-size: 12px;           /* font_caption */
+    color: var(--sk-text-tertiary);
+  }
+
+  .sk-card__pub-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--sk-orange), #F794AF);
+    flex-shrink: 0;
+  }
+
+  .sk-card__price {
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--sk-text-primary);
+  }
+  .sk-card__price--free { color: #166534; font-weight: 500; }
+
+  @media (max-width: 768px) {
+    .sk-grid { grid-template-columns: 1fr; }
+  }
 </style>
 </head>
 <body data-mode="human" data-density="light" data-bg="minimal">
@@ -384,98 +500,127 @@
           <button class="sk-tab" role="tab">New</button>
         </div>
 
-        <!-- 骨架屏：视觉还原加载中效果，无真实 loading 状态 -->
-        <div class="sk-skeleton-grid">
+        <!-- 技能卡片（假数据，符合 Agent Payment 主题） -->
+        <div class="sk-grid" id="skillsGrid">
 
-          <div class="sk-skeleton-card">
-            <div class="sk-skeleton-card__header">
-              <div class="sk-bone sk-bone--icon"></div>
-              <div class="sk-bone sk-bone--badge"></div>
+          <article class="sk-card">
+            <div class="sk-card__header">
+              <div class="sk-card__icon">🌐</div>
+              <span class="sk-card__tag sk-card__tag--free">Free</span>
             </div>
-            <div class="sk-bone sk-bone--title"></div>
-            <div class="sk-bone sk-bone--line"></div>
-            <div class="sk-bone sk-bone--line-short"></div>
-            <div style="border-top:1px solid var(--sk-border);padding-top:12px;display:flex;justify-content:space-between;">
-              <div class="sk-bone sk-bone--footer"></div>
-              <div class="sk-bone sk-bone--footer"></div>
+            <h3 class="sk-card__name">Web Search</h3>
+            <p class="sk-card__desc">Let your agent search the web in real time and retrieve up-to-date results, news, and data.</p>
+            <div class="sk-card__footer">
+              <span class="sk-card__publisher"><span class="sk-card__pub-dot"></span>Clink Official</span>
+              <span class="sk-card__price sk-card__price--free">Free</span>
             </div>
-          </div>
+          </article>
 
-          <div class="sk-skeleton-card">
-            <div class="sk-skeleton-card__header">
-              <div class="sk-bone sk-bone--icon"></div>
-              <div class="sk-bone sk-bone--badge"></div>
+          <article class="sk-card">
+            <div class="sk-card__header">
+              <div class="sk-card__icon" style="background:#FEF3C7;">💳</div>
+              <span class="sk-card__tag sk-card__tag--paid">Paid</span>
             </div>
-            <div class="sk-bone sk-bone--title" style="width:55%;"></div>
-            <div class="sk-bone sk-bone--line"></div>
-            <div class="sk-bone sk-bone--line"></div>
-            <div class="sk-bone sk-bone--line-short"></div>
-            <div style="border-top:1px solid var(--sk-border);padding-top:12px;display:flex;justify-content:space-between;">
-              <div class="sk-bone sk-bone--footer"></div>
-              <div class="sk-bone sk-bone--footer"></div>
+            <h3 class="sk-card__name">Global Checkout</h3>
+            <p class="sk-card__desc">Embed a full payment flow into your agent. Supports 135+ currencies and local payment methods.</p>
+            <div class="sk-card__footer">
+              <span class="sk-card__publisher"><span class="sk-card__pub-dot"></span>Clink Official</span>
+              <span class="sk-card__price">$0.02 / use</span>
             </div>
-          </div>
+          </article>
 
-          <div class="sk-skeleton-card">
-            <div class="sk-skeleton-card__header">
-              <div class="sk-bone sk-bone--icon"></div>
-              <div class="sk-bone sk-bone--badge"></div>
+          <article class="sk-card">
+            <div class="sk-card__header">
+              <div class="sk-card__icon" style="background:#EDE9FE;">📊</div>
+              <span class="sk-card__tag sk-card__tag--free">Free</span>
             </div>
-            <div class="sk-bone sk-bone--title" style="width:72%;"></div>
-            <div class="sk-bone sk-bone--line"></div>
-            <div class="sk-bone sk-bone--line-short"></div>
-            <div style="border-top:1px solid var(--sk-border);padding-top:12px;display:flex;justify-content:space-between;">
-              <div class="sk-bone sk-bone--footer"></div>
-              <div class="sk-bone sk-bone--footer"></div>
+            <h3 class="sk-card__name">Revenue Analytics</h3>
+            <p class="sk-card__desc">Query your transaction data conversationally. Get gross volume, success rates, and churn insights.</p>
+            <div class="sk-card__footer">
+              <span class="sk-card__publisher"><span class="sk-card__pub-dot"></span>Clink Official</span>
+              <span class="sk-card__price sk-card__price--free">Free</span>
             </div>
-          </div>
+          </article>
 
-          <div class="sk-skeleton-card">
-            <div class="sk-skeleton-card__header">
-              <div class="sk-bone sk-bone--icon"></div>
-              <div class="sk-bone sk-bone--badge"></div>
+          <article class="sk-card">
+            <div class="sk-card__header">
+              <div class="sk-card__icon" style="background:#DCFCE7;">🔁</div>
+              <span class="sk-card__tag sk-card__tag--paid">Paid</span>
             </div>
-            <div class="sk-bone sk-bone--title" style="width:60%;"></div>
-            <div class="sk-bone sk-bone--line"></div>
-            <div class="sk-bone sk-bone--line"></div>
-            <div style="border-top:1px solid var(--sk-border);padding-top:12px;display:flex;justify-content:space-between;">
-              <div class="sk-bone sk-bone--footer"></div>
-              <div class="sk-bone sk-bone--footer"></div>
+            <h3 class="sk-card__name">Smart Retry</h3>
+            <p class="sk-card__desc">Automatically recover failed transactions with dynamic routing and fallback logic.</p>
+            <div class="sk-card__footer">
+              <span class="sk-card__publisher"><span class="sk-card__pub-dot"></span>Clink Official</span>
+              <span class="sk-card__price">$0.01 / retry</span>
             </div>
-          </div>
+          </article>
 
-          <div class="sk-skeleton-card">
-            <div class="sk-skeleton-card__header">
-              <div class="sk-bone sk-bone--icon"></div>
-              <div class="sk-bone sk-bone--badge"></div>
+          <article class="sk-card">
+            <div class="sk-card__header">
+              <div class="sk-card__icon" style="background:#FEE2E2;">🛡️</div>
+              <span class="sk-card__tag sk-card__tag--paid">Paid</span>
             </div>
-            <div class="sk-bone sk-bone--title" style="width:80%;"></div>
-            <div class="sk-bone sk-bone--line"></div>
-            <div class="sk-bone sk-bone--line-short"></div>
-            <div style="border-top:1px solid var(--sk-border);padding-top:12px;display:flex;justify-content:space-between;">
-              <div class="sk-bone sk-bone--footer"></div>
-              <div class="sk-bone sk-bone--footer"></div>
+            <h3 class="sk-card__name">Fraud Shield</h3>
+            <p class="sk-card__desc">Real-time fraud detection with rule-based screening and AI scoring for high-risk transactions.</p>
+            <div class="sk-card__footer">
+              <span class="sk-card__publisher"><span class="sk-card__pub-dot"></span>Clink Official</span>
+              <span class="sk-card__price">$0.005 / check</span>
             </div>
-          </div>
+          </article>
 
-          <div class="sk-skeleton-card">
-            <div class="sk-skeleton-card__header">
-              <div class="sk-bone sk-bone--icon"></div>
-              <div class="sk-bone sk-bone--badge"></div>
+          <article class="sk-card">
+            <div class="sk-card__header">
+              <div class="sk-card__icon" style="background:#F0F9FF;">🧾</div>
+              <span class="sk-card__tag sk-card__tag--free">Free</span>
             </div>
-            <div class="sk-bone sk-bone--title" style="width:50%;"></div>
-            <div class="sk-bone sk-bone--line"></div>
-            <div class="sk-bone sk-bone--line"></div>
-            <div class="sk-bone sk-bone--line-short"></div>
-            <div style="border-top:1px solid var(--sk-border);padding-top:12px;display:flex;justify-content:space-between;">
-              <div class="sk-bone sk-bone--footer"></div>
-              <div class="sk-bone sk-bone--footer"></div>
+            <h3 class="sk-card__name">Invoice Generator</h3>
+            <p class="sk-card__desc">Generate and send professional invoices via your agent. Supports multi-currency and auto tax calculation.</p>
+            <div class="sk-card__footer">
+              <span class="sk-card__publisher"><span class="sk-card__pub-dot"></span>Community</span>
+              <span class="sk-card__price sk-card__price--free">Free</span>
             </div>
-          </div>
+          </article>
+
+          <article class="sk-card">
+            <div class="sk-card__header">
+              <div class="sk-card__icon" style="background:#F5F3FF;">💬</div>
+              <span class="sk-card__tag sk-card__tag--paid">Paid</span>
+            </div>
+            <h3 class="sk-card__name">Creator Tip</h3>
+            <p class="sk-card__desc">Let your agent send micro-tips to creators and contributors automatically after consuming their content.</p>
+            <div class="sk-card__footer">
+              <span class="sk-card__publisher"><span class="sk-card__pub-dot"></span>Clink Official</span>
+              <span class="sk-card__price">$0.001 / tip</span>
+            </div>
+          </article>
+
+          <article class="sk-card">
+            <div class="sk-card__header">
+              <div class="sk-card__icon" style="background:#FFF7ED;">🔔</div>
+              <span class="sk-card__tag sk-card__tag--free">Free</span>
+            </div>
+            <h3 class="sk-card__name">Payment Webhook</h3>
+            <p class="sk-card__desc">Subscribe to real-time payment events and let your agent react instantly to charges, refunds, and disputes.</p>
+            <div class="sk-card__footer">
+              <span class="sk-card__publisher"><span class="sk-card__pub-dot"></span>Community</span>
+              <span class="sk-card__price sk-card__price--free">Free</span>
+            </div>
+          </article>
+
+          <article class="sk-card">
+            <div class="sk-card__header">
+              <div class="sk-card__icon" style="background:#F0FDF4;">🤝</div>
+              <span class="sk-card__tag sk-card__tag--paid">Paid</span>
+            </div>
+            <h3 class="sk-card__name">Split Payment</h3>
+            <p class="sk-card__desc">Split a transaction across multiple recipients instantly. Ideal for marketplace payouts and revenue sharing.</p>
+            <div class="sk-card__footer">
+              <span class="sk-card__publisher"><span class="sk-card__pub-dot"></span>Clink Official</span>
+              <span class="sk-card__price">$0.03 / split</span>
+            </div>
+          </article>
 
         </div>
-        <!-- 加载提示文字 -->
-        <div class="sk-loading">Loading marketplace skills</div>
 
       </div>
     </section>
