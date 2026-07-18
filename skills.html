@@ -229,28 +229,58 @@
   .sk-tab.is-active { background: #161616; color: #FFF; }
   .sk-tab:hover:not(.is-active) { color: #161616; }
 
-  /* 加载态 */
+  /* 空态文字 */
   .sk-loading {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
-    padding: 80px 0;
+    padding: 48px 0 32px;
     font-family: var(--font-body);
-    font-size: 16px;           /* font_body_sm */
+    font-size: 16px;
     color: var(--sk-text-tertiary);
   }
 
-  .sk-loading__spinner {
-    width: 18px;
-    height: 18px;
-    border: 2px solid var(--sk-border);
-    border-top-color: var(--sk-text-tertiary);
-    border-radius: 50%;
-    animation: spin 0.8s linear infinite;
-    flex-shrink: 0;
+  /* 骨架屏卡片网格 */
+  .sk-skeleton-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
   }
-  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .sk-skeleton-card {
+    background: var(--sk-card);
+    border: 1px solid var(--sk-border);
+    border-radius: 16px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .sk-skeleton-card__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  /* 骨架屏占位块 */
+  .sk-bone {
+    background: linear-gradient(90deg, #EFEFEF 25%, #F7F7F7 50%, #EFEFEF 75%);
+    background-size: 200% 100%;
+    border-radius: 6px;
+    animation: shimmer 1.5s ease-in-out infinite;
+  }
+  @keyframes shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+
+  .sk-bone--icon { width: 44px; height: 44px; border-radius: 12px; flex-shrink: 0; }
+  .sk-bone--badge { width: 44px; height: 22px; border-radius: 999px; }
+  .sk-bone--title { height: 18px; width: 65%; }
+  .sk-bone--line { height: 14px; width: 100%; }
+  .sk-bone--line-short { height: 14px; width: 75%; }
+  .sk-bone--footer { height: 14px; width: 48%; }
 
   /* ---- 响应式 ---- */
   @media (max-width: 768px) {
@@ -354,10 +384,98 @@
           <button class="sk-tab" role="tab">New</button>
         </div>
 
-        <!-- 空态提示 -->
-        <div class="sk-loading" id="skillsState">
-          No skills available yet. Check back soon.
+        <!-- 骨架屏：视觉还原加载中效果，无真实 loading 状态 -->
+        <div class="sk-skeleton-grid">
+
+          <div class="sk-skeleton-card">
+            <div class="sk-skeleton-card__header">
+              <div class="sk-bone sk-bone--icon"></div>
+              <div class="sk-bone sk-bone--badge"></div>
+            </div>
+            <div class="sk-bone sk-bone--title"></div>
+            <div class="sk-bone sk-bone--line"></div>
+            <div class="sk-bone sk-bone--line-short"></div>
+            <div style="border-top:1px solid var(--sk-border);padding-top:12px;display:flex;justify-content:space-between;">
+              <div class="sk-bone sk-bone--footer"></div>
+              <div class="sk-bone sk-bone--footer"></div>
+            </div>
+          </div>
+
+          <div class="sk-skeleton-card">
+            <div class="sk-skeleton-card__header">
+              <div class="sk-bone sk-bone--icon"></div>
+              <div class="sk-bone sk-bone--badge"></div>
+            </div>
+            <div class="sk-bone sk-bone--title" style="width:55%;"></div>
+            <div class="sk-bone sk-bone--line"></div>
+            <div class="sk-bone sk-bone--line"></div>
+            <div class="sk-bone sk-bone--line-short"></div>
+            <div style="border-top:1px solid var(--sk-border);padding-top:12px;display:flex;justify-content:space-between;">
+              <div class="sk-bone sk-bone--footer"></div>
+              <div class="sk-bone sk-bone--footer"></div>
+            </div>
+          </div>
+
+          <div class="sk-skeleton-card">
+            <div class="sk-skeleton-card__header">
+              <div class="sk-bone sk-bone--icon"></div>
+              <div class="sk-bone sk-bone--badge"></div>
+            </div>
+            <div class="sk-bone sk-bone--title" style="width:72%;"></div>
+            <div class="sk-bone sk-bone--line"></div>
+            <div class="sk-bone sk-bone--line-short"></div>
+            <div style="border-top:1px solid var(--sk-border);padding-top:12px;display:flex;justify-content:space-between;">
+              <div class="sk-bone sk-bone--footer"></div>
+              <div class="sk-bone sk-bone--footer"></div>
+            </div>
+          </div>
+
+          <div class="sk-skeleton-card">
+            <div class="sk-skeleton-card__header">
+              <div class="sk-bone sk-bone--icon"></div>
+              <div class="sk-bone sk-bone--badge"></div>
+            </div>
+            <div class="sk-bone sk-bone--title" style="width:60%;"></div>
+            <div class="sk-bone sk-bone--line"></div>
+            <div class="sk-bone sk-bone--line"></div>
+            <div style="border-top:1px solid var(--sk-border);padding-top:12px;display:flex;justify-content:space-between;">
+              <div class="sk-bone sk-bone--footer"></div>
+              <div class="sk-bone sk-bone--footer"></div>
+            </div>
+          </div>
+
+          <div class="sk-skeleton-card">
+            <div class="sk-skeleton-card__header">
+              <div class="sk-bone sk-bone--icon"></div>
+              <div class="sk-bone sk-bone--badge"></div>
+            </div>
+            <div class="sk-bone sk-bone--title" style="width:80%;"></div>
+            <div class="sk-bone sk-bone--line"></div>
+            <div class="sk-bone sk-bone--line-short"></div>
+            <div style="border-top:1px solid var(--sk-border);padding-top:12px;display:flex;justify-content:space-between;">
+              <div class="sk-bone sk-bone--footer"></div>
+              <div class="sk-bone sk-bone--footer"></div>
+            </div>
+          </div>
+
+          <div class="sk-skeleton-card">
+            <div class="sk-skeleton-card__header">
+              <div class="sk-bone sk-bone--icon"></div>
+              <div class="sk-bone sk-bone--badge"></div>
+            </div>
+            <div class="sk-bone sk-bone--title" style="width:50%;"></div>
+            <div class="sk-bone sk-bone--line"></div>
+            <div class="sk-bone sk-bone--line"></div>
+            <div class="sk-bone sk-bone--line-short"></div>
+            <div style="border-top:1px solid var(--sk-border);padding-top:12px;display:flex;justify-content:space-between;">
+              <div class="sk-bone sk-bone--footer"></div>
+              <div class="sk-bone sk-bone--footer"></div>
+            </div>
+          </div>
+
         </div>
+        <!-- 加载提示文字 -->
+        <div class="sk-loading">Loading marketplace skills</div>
 
       </div>
     </section>
